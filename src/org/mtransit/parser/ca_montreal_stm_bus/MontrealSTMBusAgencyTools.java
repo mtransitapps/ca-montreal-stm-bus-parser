@@ -27,7 +27,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		if (args == null || args.length == 0) {
 			args = new String[3];
 			args[0] = "input/gtfs.zip";
-			args[1] = "../ca-montreal-stm-bus/res/raw/";
+			args[1] = "../ca-montreal-stm-bus-android/res/raw/";
 			args[2] = ""; // files-prefix
 		}
 		new MontrealSTMBusAgencyTools().start(args);
