@@ -2,6 +2,7 @@ package org.mtransit.parser.ca_montreal_stm_bus;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mtransit.parser.DefaultAgencyTools;
@@ -88,21 +89,18 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		return Integer.valueOf(getStopCode(gStop)); // use stop code instead of stop ID
 	}
 
-	private static final String P1 = "(";
-	private static final String P1S = "( ";
-	private static final String P2 = ")";
-	private static final String SP2 = "  )";
-	private static final String P1NUITP2 = "(nuit)";
-	private static final String S = "/";
-	private static final String SSS = " / ";
+	private static final Pattern P1NUITP2 = Pattern.compile("(\\(nuit\\))", Pattern.CASE_INSENSITIVE);
 
 	@Override
 	public String getRouteLongName(GRoute gRoute) {
 		String result = gRoute.route_long_name;
-		result = result.replace(P1S, P1);
-		result = result.replace(SP2, P2);
-		result = result.replace(P1NUITP2, StringUtils.EMPTY);
-		result = result.replace(S, SSS);
+		return cleanRouteLongName(result);
+	}
+
+	private String cleanRouteLongName(String result) {
+		result = P1NUITP2.matcher(result).replaceAll(StringUtils.EMPTY);
+		result = Utils.replaceAll(result.trim(), START_WITH_ST, StringUtils.EMPTY);
+		result = Utils.replaceAll(result, SPACE_ST, MSpec.SPACE);
 		return MSpec.cleanLabel(result);
 	}
 
@@ -160,107 +158,48 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		mTrip.setHeadsignDirection(directionType);
 	}
 
-	private static final String PLACE_CHAR_DE = "de ";
-	private static final int PLACE_CHAR_DE_LENGTH = PLACE_CHAR_DE.length();
-
-	private static final String PLACE_CHAR_DES = "des ";
-	private static final int PLACE_CHAR_DES_LENGTH = PLACE_CHAR_DES.length();
-
-	private static final String PLACE_CHAR_DU = "du ";
-	private static final int PLACE_CHAR_DU_LENGTH = PLACE_CHAR_DU.length();
-
-	private static final String PLACE_CHAR_LA = "la ";
-	private static final int PLACE_CHAR_LA_LENGTH = PLACE_CHAR_LA.length();
-
-	private static final String PLACE_CHAR_LE = "le ";
-	private static final int PLACE_CHAR_LE_LENGTH = PLACE_CHAR_LE.length();
-
-	private static final String PLACE_CHAR_L = "l'";
-	private static final int PLACE_CHAR_L_LENGTH = PLACE_CHAR_L.length();
-
-	private static final String PLACE_CHAR_D = "d'";
-	private static final int PLACE_CHAR_D_LENGTH = PLACE_CHAR_D.length();
-
-	private static final String PLACE_CHAR_IN = "/ ";
-	private static final String PLACE_CHAR_IN_DE = PLACE_CHAR_IN + PLACE_CHAR_DE;
-	private static final String PLACE_CHAR_IN_DES = PLACE_CHAR_IN + PLACE_CHAR_DES;
-	private static final String PLACE_CHAR_IN_DU = PLACE_CHAR_IN + PLACE_CHAR_DU;
-	private static final String PLACE_CHAR_IN_LA = PLACE_CHAR_IN + PLACE_CHAR_LA;
-	private static final String PLACE_CHAR_IN_LE = PLACE_CHAR_IN + PLACE_CHAR_LE;
-	private static final String PLACE_CHAR_IN_L = PLACE_CHAR_IN + PLACE_CHAR_L;
-	private static final String PLACE_CHAR_IN_D = PLACE_CHAR_IN + PLACE_CHAR_D;
-
-	private static final String PLACE_CHAR_PARENTHESE = "(";
-	private static final String PLACE_CHAR_PARENTHESE_DE = PLACE_CHAR_PARENTHESE + PLACE_CHAR_DE;
-	private static final String PLACE_CHAR_PARENTHESE_DES = PLACE_CHAR_PARENTHESE + PLACE_CHAR_DES;
-	private static final String PLACE_CHAR_PARENTHESE_DU = PLACE_CHAR_PARENTHESE + PLACE_CHAR_DU;
-	private static final String PLACE_CHAR_PARENTHESE_LA = PLACE_CHAR_PARENTHESE + PLACE_CHAR_LA;
-	private static final String PLACE_CHAR_PARENTHESE_LE = PLACE_CHAR_PARENTHESE + PLACE_CHAR_LE;
-	private static final String PLACE_CHAR_PARENTHESE_L = PLACE_CHAR_PARENTHESE + PLACE_CHAR_L;
-	private static final String PLACE_CHAR_PARENTHESE_D = PLACE_CHAR_PARENTHESE + PLACE_CHAR_D;
-
-	private static final String PLACE_CHAR_PARENTHESE_STATION = PLACE_CHAR_PARENTHESE + "station ";
-	private static final String PLACE_CHAR_PARENTHESE_STATION_BIG = PLACE_CHAR_PARENTHESE + "Station ";
 
 	@Override
 	public String cleanStopName(String result) {
-		if (result.startsWith(PLACE_CHAR_DE)) {
-			result = result.substring(PLACE_CHAR_DE_LENGTH);
-		} else if (result.startsWith(PLACE_CHAR_DES)) {
-			result = result.substring(PLACE_CHAR_DES_LENGTH);
-		} else if (result.startsWith(PLACE_CHAR_DU)) {
-			result = result.substring(PLACE_CHAR_DU_LENGTH);
-		}
-		if (result.startsWith(PLACE_CHAR_LA)) {
-			result = result.substring(PLACE_CHAR_LA_LENGTH);
-		} else if (result.startsWith(PLACE_CHAR_LE)) {
-			result = result.substring(PLACE_CHAR_LE_LENGTH);
-		} else if (result.startsWith(PLACE_CHAR_L)) {
-			result = result.substring(PLACE_CHAR_L_LENGTH);
-		} else if (result.startsWith(PLACE_CHAR_D)) {
-			result = result.substring(PLACE_CHAR_D_LENGTH);
-		}
 
-		if (result.contains(PLACE_CHAR_IN_DE)) {
-			result = result.replace(PLACE_CHAR_IN_DE, PLACE_CHAR_IN);
-		} else if (result.contains(PLACE_CHAR_IN_DES)) {
-			result = result.replace(PLACE_CHAR_IN_DES, PLACE_CHAR_IN);
-		} else if (result.contains(PLACE_CHAR_IN_DU)) {
-			result = result.replace(PLACE_CHAR_IN_DU, PLACE_CHAR_IN);
-		}
-		if (result.contains(PLACE_CHAR_IN_LA)) {
-			result = result.replace(PLACE_CHAR_IN_LA, PLACE_CHAR_IN);
-		} else if (result.contains(PLACE_CHAR_IN_LE)) {
-			result = result.replace(PLACE_CHAR_IN_LE, PLACE_CHAR_IN);
-		} else if (result.contains(PLACE_CHAR_IN_L)) {
-			result = result.replace(PLACE_CHAR_IN_L, PLACE_CHAR_IN);
-		} else if (result.contains(PLACE_CHAR_IN_D)) {
-			result = result.replace(PLACE_CHAR_IN_D, PLACE_CHAR_IN);
-		}
-
-		if (result.contains(PLACE_CHAR_PARENTHESE_DE)) {
-			result = result.replace(PLACE_CHAR_PARENTHESE_DE, PLACE_CHAR_PARENTHESE);
-		} else if (result.contains(PLACE_CHAR_PARENTHESE_DES)) {
-			result = result.replace(PLACE_CHAR_PARENTHESE_DES, PLACE_CHAR_PARENTHESE);
-		} else if (result.contains(PLACE_CHAR_PARENTHESE_DU)) {
-			result = result.replace(PLACE_CHAR_PARENTHESE_DU, PLACE_CHAR_PARENTHESE);
-		}
-		if (result.contains(PLACE_CHAR_PARENTHESE_LA)) {
-			result = result.replace(PLACE_CHAR_PARENTHESE_LA, PLACE_CHAR_PARENTHESE);
-		} else if (result.contains(PLACE_CHAR_PARENTHESE_LE)) {
-			result = result.replace(PLACE_CHAR_PARENTHESE_LE, PLACE_CHAR_PARENTHESE);
-		} else if (result.contains(PLACE_CHAR_PARENTHESE_L)) {
-			result = result.replace(PLACE_CHAR_PARENTHESE_L, PLACE_CHAR_PARENTHESE);
-		} else if (result.contains(PLACE_CHAR_PARENTHESE_D)) {
-			result = result.replace(PLACE_CHAR_PARENTHESE_D, PLACE_CHAR_PARENTHESE);
-		}
-
-		if (result.contains(PLACE_CHAR_PARENTHESE_STATION)) {
-			result = result.replace(PLACE_CHAR_PARENTHESE_STATION, PLACE_CHAR_PARENTHESE);
-		}
-		if (result.contains(PLACE_CHAR_PARENTHESE_STATION_BIG)) {
-			result = result.replace(PLACE_CHAR_PARENTHESE_STATION_BIG, PLACE_CHAR_PARENTHESE);
-		}
-		return super.cleanStopName(result);
+		result = CLEAN_SUBWAY.matcher(result).replaceAll(CLEAN_SUBWAY_REPLACEMENT);
+		result = CLEAN_SUBWAY2.matcher(result).replaceAll(CLEAN_SUBWAY2_REPLACEMENT);
+		result = MSpec.CLEAN_SLASHES.matcher(result).replaceAll(MSpec.CLEAN_SLASHES_REPLACEMENT);
+		result = Utils.replaceAll(result.trim(), START_WITH_ST, StringUtils.EMPTY);
+		result = Utils.replaceAll(result, SPACE_ST, MSpec.SPACE);
+		return super.cleanStopNameFR(result); // MSpec.cleanLabel(result);
 	}
+
+	private static final String PARENTHESE1 = "\\(";
+	private static final String PARENTHESE2 = "\\)";
+	private static final String SLASH = "/";
+	private static final Pattern CLEAN_SUBWAY = Pattern.compile("(station)([^" + PARENTHESE1 + "]*)" + PARENTHESE1 + "([^" + SLASH + "]*)" + SLASH + "([^"
+			+ PARENTHESE2 + "]*)" + PARENTHESE2, Pattern.CASE_INSENSITIVE);
+	private static final String CLEAN_SUBWAY_REPLACEMENT = "$3 " + SLASH + " $4 " + PARENTHESE1 + "$2" + PARENTHESE2 + "";
+	private static final Pattern CLEAN_SUBWAY2 = Pattern.compile("(station)([^" + SLASH + "]*)" + SLASH + "(.*)", Pattern.CASE_INSENSITIVE);
+	private static final String CLEAN_SUBWAY2_REPLACEMENT = "$3 " + PARENTHESE1 + "$2" + PARENTHESE2 + "";
+
+	private static final String CHARS_NO = "no ";
+
+	private static final String CHARS_VERS = "vers "; // , Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+
+	private static final String CHARS_STAR = "\\*";
+
+	private static final String CHARS_SLASH = "/";
+
+	private static final String CHARS_DASH = "-";
+
+	private static final Pattern[] START_WITH_ST = new Pattern[] { //
+	Pattern.compile("(^" + CHARS_NO + ")", Pattern.CASE_INSENSITIVE), //
+			Pattern.compile("(^" + CHARS_VERS + ")", Pattern.CASE_INSENSITIVE), //
+			Pattern.compile("(^" + CHARS_STAR + ")", Pattern.CASE_INSENSITIVE), //
+			Pattern.compile("(^" + CHARS_SLASH + ")", Pattern.CASE_INSENSITIVE), //
+			Pattern.compile("(^" + CHARS_DASH + ")", Pattern.CASE_INSENSITIVE) //
+	};
+
+	private static final Pattern[] SPACE_ST = new Pattern[] { //
+	Pattern.compile("( " + CHARS_NO + ")", Pattern.CASE_INSENSITIVE), //
+			Pattern.compile("( " + CHARS_VERS + ")", Pattern.CASE_INSENSITIVE) //
+	};
+
 }
