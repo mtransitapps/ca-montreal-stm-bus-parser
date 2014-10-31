@@ -28,7 +28,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		if (args == null || args.length == 0) {
 			args = new String[3];
 			args[0] = "input/gtfs.zip";
-			args[1] = "../ca-montreal-stm-bus-android/res/raw/";
+			args[1] = "../../mtransitapps/ca-montreal-stm-bus-android/res/raw/";
 			args[2] = ""; // files-prefix
 		}
 		new MontrealSTMBusAgencyTools().start(args);
@@ -97,23 +97,25 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		return cleanRouteLongName(result);
 	}
 
+	private static final Pattern EXPRESS = Pattern.compile("(express)", Pattern.CASE_INSENSITIVE);
+	private static final String EXPRESS_REPLACEMENT = " ";
+
+	private static final Pattern NAVETTE = Pattern.compile("(navette)", Pattern.CASE_INSENSITIVE);
+	private static final String NAVETTE_REPLACEMENT = " ";
+
 	private String cleanRouteLongName(String result) {
 		result = P1NUITP2.matcher(result).replaceAll(StringUtils.EMPTY);
+		result = EXPRESS.matcher(result).replaceAll(EXPRESS_REPLACEMENT);
+		result = NAVETTE.matcher(result).replaceAll(NAVETTE_REPLACEMENT);
 		result = Utils.replaceAll(result.trim(), START_WITH_ST, StringUtils.EMPTY);
 		result = Utils.replaceAll(result, SPACE_ST, MSpec.SPACE);
-		return MSpec.cleanLabel(result);
+		return MSpec.cleanLabelFR(result);
 	}
 
 	public static final String COLOR_GREEEN = "007339";
 	public static final String COLOR_BLACK = "000000";
 	public static final String COLOR_BLUE = "0060AA";
-	public static final String COLOR_RED = "ff0000";
 
-	public static final String COLOR_LOCAL = "009ee0";
-	public static final String COLOR_10MIN = "97be0d";
-	public static final String COLOR_NIGHT = "646567";
-	public static final String COLOR_EXPRESS = "e4368a";
-	public static final String COLOR_SHUTTLE = "781b7d";
 
 	public static final List<Integer> ROUTES_10MIN = Arrays.asList(new Integer[] { //
 			18, 24, 32, 33, 44, 45, 48, 49, 51, 55, 64, 67, 69, 80, 90, 97, // 0
@@ -121,19 +123,12 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 					211, // 2
 					406, 470 }); // 4
 
-	public static final List<Integer> ROUTES_RED = Arrays.asList(new Integer[] { //
-			13, 25, 39, 46, 52, 73, 74, 75, // 0
-					101, 115, 116, 135, 188, // 1
-					213, 216, 218, 219, 225 }); // 2
 
 	@Override
 	public String getRouteColor(GRoute gRoute) {
 		int routeId = getRouteId(gRoute);
-		if (routeId == 747) {
+		if (routeId >= 700) {
 			return COLOR_BLUE;
-		}
-		if (ROUTES_RED.contains(routeId)) {
-			return COLOR_RED;
 		}
 		if (routeId >= 400) {
 			return COLOR_GREEEN;
