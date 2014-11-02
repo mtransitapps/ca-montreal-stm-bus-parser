@@ -22,7 +22,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	public static final String ROUTE_TYPE_FILTER = "3"; // bus only
 
-	public static final String SERVICE_ID_FILTER = "14S"; // TODO use calendar
+	public static final String SERVICE_ID_FILTER = "14N"; // TODO use calendar
 
 	public static void main(String[] args) {
 		if (args == null || args.length == 0) {
