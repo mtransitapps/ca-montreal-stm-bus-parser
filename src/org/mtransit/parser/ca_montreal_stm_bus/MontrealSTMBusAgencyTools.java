@@ -80,11 +80,6 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public String getRouteShortName(GRoute gRoute) {
-		return StringUtils.leftPad(gRoute.route_short_name, 3); // route short name length = 3
-	}
-
-	@Override
 	public int getStopId(GStop gStop) {
 		return Integer.valueOf(getStopCode(gStop)); // use stop code instead of stop ID
 	}
