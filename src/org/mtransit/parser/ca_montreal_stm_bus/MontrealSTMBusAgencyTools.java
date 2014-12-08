@@ -143,8 +143,8 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public void setTripHeadsign(MTrip mTrip, GTrip gTrip) {
-		final String directionString = gTrip.trip_headsign.substring(gTrip.trip_headsign.length() - 1);
-		final MDirectionType directionType = MDirectionType.parse(directionString);
+		String directionString = gTrip.trip_headsign.substring(gTrip.trip_headsign.length() - 1);
+		MDirectionType directionType = MDirectionType.parse(directionString);
 		mTrip.setHeadsignDirection(directionType);
 	}
 
