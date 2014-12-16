@@ -13,6 +13,7 @@ import org.mtransit.parser.gtfs.data.GRoute;
 import org.mtransit.parser.gtfs.data.GStop;
 import org.mtransit.parser.gtfs.data.GTrip;
 import org.mtransit.parser.mt.data.MDirectionType;
+import org.mtransit.parser.mt.data.MRoute;
 import org.mtransit.parser.mt.data.MSpec;
 import org.mtransit.parser.mt.data.MTrip;
 
@@ -75,7 +76,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public int getRouteId(GRoute gRoute) {
+	public long getRouteId(GRoute gRoute) {
 		return Integer.valueOf(gRoute.route_short_name); // use route short name instead of route ID
 	}
 
@@ -121,14 +122,14 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String getRouteColor(GRoute gRoute) {
-		int routeId = getRouteId(gRoute);
-		if (routeId >= 700) {
+		long routeId = getRouteId(gRoute);
+		if (routeId >= 700l) {
 			return COLOR_BLUE;
 		}
-		if (routeId >= 400) {
+		if (routeId >= 400l) {
 			return COLOR_GREEEN;
 		}
-		if (routeId >= 300) {
+		if (routeId >= 300l) {
 			return COLOR_BLACK;
 		}
 		return COLOR_BLUE;
@@ -142,7 +143,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public void setTripHeadsign(MTrip mTrip, GTrip gTrip) {
+	public void setTripHeadsign(MRoute route, MTrip mTrip, GTrip gTrip) {
 		String directionString = gTrip.trip_headsign.substring(gTrip.trip_headsign.length() - 1);
 		MDirectionType directionType = MDirectionType.parse(directionString);
 		mTrip.setHeadsignDirection(directionType);
