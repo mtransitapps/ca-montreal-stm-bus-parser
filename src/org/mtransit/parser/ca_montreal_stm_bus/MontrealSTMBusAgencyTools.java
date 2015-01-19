@@ -27,8 +27,6 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	public static final String ROUTE_TYPE_FILTER = "3"; // bus only
 
-	private String startWithFilter;
-
 	public static void main(String[] args) {
 		if (args == null || args.length == 0) {
 			args = new String[3];
@@ -38,6 +36,8 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		}
 		new MontrealSTMBusAgencyTools().start(args);
 	}
+
+	private String startWithFilter;
 
 	@Override
 	public void start(String[] args) {
