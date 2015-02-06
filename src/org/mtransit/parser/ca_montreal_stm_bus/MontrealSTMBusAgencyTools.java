@@ -138,13 +138,6 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		return COLOR_BLUE;
 	}
 
-	private static final String COLOR_WHITE = "FFFFFF";
-
-	@Override
-	public String getRouteTextColor(GRoute gRoute) {
-		return COLOR_WHITE;
-	}
-
 	@Override
 	public void setTripHeadsign(MRoute route, MTrip mTrip, GTrip gTrip) {
 		String directionString = gTrip.trip_headsign.substring(gTrip.trip_headsign.length() - 1);
