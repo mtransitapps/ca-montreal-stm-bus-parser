@@ -1,8 +1,6 @@
 package org.mtransit.parser.ca_montreal_stm_bus;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -111,16 +109,18 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		return MSpec.cleanLabelFR(result);
 	}
 
+	private static final String AGENCY_COLOR = "009EE0";
+
+	@Override
+	public String getAgencyColor() {
+		return AGENCY_COLOR;
+	}
+
 	public static final String COLOR_GREEEN = "007339";
 	public static final String COLOR_BLACK = "000000";
 	public static final String COLOR_BLUE = "0060AA";
 
 
-	public static final List<Integer> ROUTES_10MIN = Arrays.asList(new Integer[] { //
-			18, 24, 32, 33, 44, 45, 48, 49, 51, 55, 64, 67, 69, 80, 90, 97, // 0
-					103, 105, 106, 121, 136, 139, 141, 161, 165, 171, 187, 193, // 1
-					211, // 2
-					406, 470 }); // 4
 
 
 	@Override
