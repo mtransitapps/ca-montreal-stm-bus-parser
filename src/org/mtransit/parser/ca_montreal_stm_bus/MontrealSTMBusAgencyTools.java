@@ -154,9 +154,21 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		result = MSpec.CLEAN_SLASHES.matcher(result).replaceAll(MSpec.CLEAN_SLASHES_REPLACEMENT);
 		result = Utils.replaceAll(result.trim(), START_WITH_ST, StringUtils.EMPTY);
 		result = Utils.replaceAll(result, SPACE_ST, MSpec.SPACE);
-		return super.cleanStopNameFR(result); // MSpec.cleanLabel(result);
+		result = super.cleanStopNameFR(result);
+		StringBuilder resultSB = new StringBuilder();
+		String[] words = result.split(SLASH);
+		for (String word : words) {
+			if (!resultSB.toString().contains(word.trim())) {
+				if (resultSB.length() > 0) {
+					resultSB.append(SPACE).append(SLASH).append(SPACE);
+				}
+				resultSB.append(word.trim());
+			}
+		}
+		return resultSB.toString();
 	}
 
+	private static final String SPACE = " ";
 	private static final String PARENTHESE1 = "\\(";
 	private static final String PARENTHESE2 = "\\)";
 	private static final String SLASH = "/";
