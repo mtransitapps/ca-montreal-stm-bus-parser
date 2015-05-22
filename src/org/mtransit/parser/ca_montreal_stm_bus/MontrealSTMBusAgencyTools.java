@@ -85,6 +85,9 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	private static final Pattern P1NUITP2 = Pattern.compile("(\\(nuit\\))", Pattern.CASE_INSENSITIVE);
 
+	private static final String RTS_809 = "809";
+	private static final String RLN_809 = "Navette";
+
 	@Override
 	public String getRouteLongName(GRoute gRoute) {
 		String gRouteLongName = gRoute.route_long_name;
