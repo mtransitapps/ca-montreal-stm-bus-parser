@@ -9,6 +9,7 @@ import org.mtransit.parser.Utils;
 import org.mtransit.parser.gtfs.data.GCalendar;
 import org.mtransit.parser.gtfs.data.GCalendarDate;
 import org.mtransit.parser.gtfs.data.GRoute;
+import org.mtransit.parser.gtfs.data.GSpec;
 import org.mtransit.parser.gtfs.data.GStop;
 import org.mtransit.parser.gtfs.data.GTrip;
 import org.mtransit.parser.mt.data.MAgency;
@@ -86,14 +87,19 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String getRouteLongName(GRoute gRoute) {
-		String result = gRoute.route_long_name;
-		return cleanRouteLongName(result);
+		String gRouteLongName = gRoute.route_long_name;
+		if (StringUtils.isEmpty(gRouteLongName)) {
+			if (RTS_809.equals(gRoute.route_short_name)) {
+				return RLN_809;
+			}
+		}
+		return cleanRouteLongName(gRouteLongName);
 	}
 
 	private static final Pattern EXPRESS = Pattern.compile("(express)", Pattern.CASE_INSENSITIVE);
 	private static final String EXPRESS_REPLACEMENT = " ";
 
-	private static final Pattern NAVETTE = Pattern.compile("(navette)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern NAVETTE = Pattern.compile("(navette )", Pattern.CASE_INSENSITIVE);
 	private static final String NAVETTE_REPLACEMENT = " ";
 
 	private String cleanRouteLongName(String result) {
@@ -135,10 +141,9 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public void setTripHeadsign(MRoute route, MTrip mTrip, GTrip gTrip) {
+	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
 		String directionString = gTrip.trip_headsign.substring(gTrip.trip_headsign.length() - 1);
-		MDirectionType directionType = MDirectionType.parse(directionString);
-		mTrip.setHeadsignDirection(directionType);
+		mTrip.setHeadsignDirection(MDirectionType.parse(directionString));
 	}
 
 
