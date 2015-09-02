@@ -1081,7 +1081,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		stopName = CleanUtils.cleanSlashes(stopName);
 		stopName = Utils.replaceAll(stopName.trim(), START_WITH_ST, StringUtils.EMPTY);
 		stopName = Utils.replaceAll(stopName, SPACE_ST, CleanUtils.SPACE);
-		stopName = super.cleanStopNameFR(stopName);
+		stopName = CleanUtils.cleanLabelFR(stopName);
 		StringBuilder resultSB = new StringBuilder();
 		String[] words = stopName.split(SLASH);
 		for (String word : words) {
