@@ -159,43 +159,22 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 			mTrip.setHeadsignDirection(MDirectionType.WEST);
 			return;
 		}
-		if (mRoute.id == 10l) {
+		if (mRoute.getId() == 10l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 12l) {
+		} else if (mRoute.getId() == 12l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
 			}
-		} else if (mRoute.id == 13l) {
+		} else if (mRoute.getId() == 13l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 14l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 15l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 16l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 17l) {
+		} else if (mRoute.getId() == 14l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -203,57 +182,20 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 18l) {
+		} else if (mRoute.getId() == 15l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 16l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 19l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 21l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			}
-		} else if (mRoute.id == 22l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 24l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 25l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			}
-		} else if (mRoute.id == 26l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 27l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 29l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 30l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			}
-		} else if (mRoute.id == 31l) {
+		} else if (mRoute.getId() == 17l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -261,23 +203,57 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 34l) {
+		} else if (mRoute.getId() == 18l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
 			}
-		} else if (mRoute.id == 36l) {
+		} else if (mRoute.getId() == 19l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
-			} else if (gTrip.getDirectionId() == 1) {
+			}
+		} else if (mRoute.getId() == 21l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.NORTH);
+				return;
+			}
+		} else if (mRoute.getId() == 22l) {
+			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 37l) {
+		} else if (mRoute.getId() == 24l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 25l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.NORTH);
+				return;
+			}
+		} else if (mRoute.getId() == 26l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 27l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 29l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 30l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.NORTH);
+				return;
+			}
+		} else if (mRoute.getId() == 31l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -285,52 +261,23 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 41l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 44l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 45l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 46l) {
+		} else if (mRoute.getId() == 34l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
-			}
-		} else if (mRoute.id == 47l) {
-			if (gTrip.getDirectionId() == 1) {
+			} else if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 48l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 49l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 51l) {
+		} else if (mRoute.getId() == 36l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
-			}
-		} else if (mRoute.id == 52l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 53l) {
+		} else if (mRoute.getId() == 37l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -338,47 +285,52 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 57l) {
+		} else if (mRoute.getId() == 41l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 58l) {
+		} else if (mRoute.getId() == 44l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 45l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 46l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 61l) {
+		} else if (mRoute.getId() == 47l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 48l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 49l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 51l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 63l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 64l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 66l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 67l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 70l) {
+		} else if (mRoute.getId() == 52l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 71l) {
+		} else if (mRoute.getId() == 53l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -386,464 +338,47 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 72l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 73l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 74l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			}
-		} else if (mRoute.id == 75l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 76l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 77l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 78l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
+		} else if (mRoute.getId() == 57l) {
+			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 80l) {
+		} else if (mRoute.getId() == 58l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 61l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 63l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 85l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 90l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 92l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 93l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 95l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 97l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 99l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 100l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 101l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 102l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 103l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 104l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 105l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 106l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 108l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 109l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			}
-		} else if (mRoute.id == 110l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 112l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 113l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 115l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 117l) {
+		} else if (mRoute.getId() == 64l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 119l) {
+		} else if (mRoute.getId() == 66l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 124l) {
+		} else if (mRoute.getId() == 67l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 125l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 129l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 131l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 135l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 136l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 138l) {
+		} else if (mRoute.getId() == 70l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 140l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 141l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 144l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 146l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 150l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 160l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 161l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 162l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 164l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 165l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 166l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 168l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			}
-		} else if (mRoute.id == 170l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 171l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 174l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 175l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 177l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 178l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			}
-		} else if (mRoute.id == 179l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 180l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 185l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 186l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 187l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 188l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 189l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 191l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 192l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 195l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 196l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			}
-		} else if (mRoute.id == 197l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 202l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 211l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 213l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 215l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 216l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 217l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 220l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 225l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 258l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 259l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 350l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 353l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 354l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 355l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 356l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 357l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 358l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 359l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.id == 360l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 361l) {
+		} else if (mRoute.getId() == 71l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -851,12 +386,22 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 362l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
+		} else if (mRoute.getId() == 72l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 363l) {
+		} else if (mRoute.getId() == 73l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 74l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.NORTH);
+				return;
+			}
+		} else if (mRoute.getId() == 75l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -864,12 +409,17 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 364l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
+		} else if (mRoute.getId() == 76l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 368l) {
+		} else if (mRoute.getId() == 77l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 78l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
@@ -877,7 +427,423 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 369l) {
+		} else if (mRoute.getId() == 80l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 85l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 90l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 92l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 93l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 95l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 97l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 99l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 100l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 101l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 102l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 103l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 104l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 105l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 106l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 108l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 109l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.NORTH);
+				return;
+			}
+		} else if (mRoute.getId() == 110l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 112l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 113l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 115l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 117l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 119l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 124l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 125l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 129l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 131l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 135l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 136l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 138l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 140l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 141l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 144l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 146l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 150l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 160l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 161l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 162l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 164l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 165l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 166l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 168l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.NORTH);
+				return;
+			}
+		} else if (mRoute.getId() == 170l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 171l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 174l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 175l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 177l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 178l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.NORTH);
+				return;
+			}
+		} else if (mRoute.getId() == 179l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 180l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 185l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 186l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 187l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 188l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 189l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 191l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 192l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 195l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 196l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.NORTH);
+				return;
+			}
+		} else if (mRoute.getId() == 197l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 202l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 211l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 213l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 215l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 216l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 217l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 220l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 225l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 258l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 259l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 350l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 353l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 354l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 355l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 356l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 357l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 358l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 359l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 360l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 361l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -885,17 +851,25 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 370l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
+		} else if (mRoute.getId() == 362l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 371l) {
-			if (gTrip.getDirectionId() == 1) {
+		} else if (mRoute.getId() == 363l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.NORTH);
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 372l) {
+		} else if (mRoute.getId() == 364l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 368l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
@@ -903,157 +877,183 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 376l) {
+		} else if (mRoute.getId() == 369l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.NORTH);
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 370l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 382l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 405l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 406l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			}
-		} else if (mRoute.id == 409l) {
+		} else if (mRoute.getId() == 371l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 410l) {
-			if (gTrip.getDirectionId() == 1) {
+		} else if (mRoute.getId() == 372l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 411l) {
+		} else if (mRoute.getId() == 376l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 425l) {
+		} else if (mRoute.getId() == 382l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 427l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
+		} else if (mRoute.getId() == 405l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 430l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
+		} else if (mRoute.getId() == 406l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 432l) {
+		} else if (mRoute.getId() == 409l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 439l) {
+		} else if (mRoute.getId() == 410l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 411l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 425l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignDirection(MDirectionType.EAST);
+				return;
+			}
+		} else if (mRoute.getId() == 427l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 430l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 432l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 440l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 448l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-		} else if (mRoute.id == 449l) {
+		} else if (mRoute.getId() == 439l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 467l) {
+		} else if (mRoute.getId() == 440l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 448l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.WEST);
+				return;
+			}
+		} else if (mRoute.getId() == 449l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 468l) {
+		} else if (mRoute.getId() == 467l) {
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
+				return;
+			}
+		} else if (mRoute.getId() == 468l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 469l) {
+		} else if (mRoute.getId() == 469l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 470l) {
+		} else if (mRoute.getId() == 470l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 475l) {
+		} else if (mRoute.getId() == 475l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 485l) {
+		} else if (mRoute.getId() == 485l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 486l) {
+		} else if (mRoute.getId() == 486l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 487l) {
+		} else if (mRoute.getId() == 487l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 491l) {
+		} else if (mRoute.getId() == 491l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 496l) {
+		} else if (mRoute.getId() == 496l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 715l) {
+		} else if (mRoute.getId() == 715l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 747l) {
+		} else if (mRoute.getId() == 747l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 767l) {
+		} else if (mRoute.getId() == 767l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 769l) {
+		} else if (mRoute.getId() == 769l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
 			}
-		} else if (mRoute.id == 777l) {
+		} else if (mRoute.getId() == 777l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (mRoute.id == 809l) {
+		} else if (mRoute.getId() == 809l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
