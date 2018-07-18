@@ -1,6 +1,8 @@
 package org.mtransit.parser.ca_montreal_stm_bus;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
@@ -44,6 +46,10 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		System.out.printf("\nGenerating STM bus data... DONE in %s.\n", Utils.getPrettyDuration(System.currentTimeMillis() - start));
 	}
 
+	@Override
+	public boolean excludingAll() {
+		return this.serviceIds != null && this.serviceIds.isEmpty();
+	}
 
 	@Override
 	public Integer getAgencyRouteType() {
@@ -125,20 +131,22 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	public static final String COLOR_GREEEN = "007339";
 	public static final String COLOR_BLACK = "000000";
 	public static final String COLOR_BLUE = "0060AA";
+	public static final String COLOR_OR = "FFD700";
 
 
 
+	public static final List<Long> ROUTES_OR = Arrays.asList(new Long[] { //
+			252L, 253L, 254L, 256L, 257L, 258L, 259L, //
+					260L, 262L, 263L //
+			});
 
 	@Override
 	public String getRouteColor(GRoute gRoute) {
 		long routeId = getRouteId(gRoute);
-		if (routeId >= 700l) {
-			return COLOR_BLUE;
-		}
-		if (routeId >= 400l) {
+		if (400L <= routeId && routeId <= 499L) {
 			return COLOR_GREEEN;
 		}
-		if (routeId >= 300l) {
+		if (300L <= routeId && routeId <= 399L) {
 			return COLOR_BLACK;
 		}
 		return COLOR_BLUE;
@@ -1127,5 +1135,4 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	Pattern.compile("( " + CHARS_NO + ")", Pattern.CASE_INSENSITIVE), //
 			Pattern.compile("( " + CHARS_VERS + ")", Pattern.CASE_INSENSITIVE) //
 	};
-
 }
