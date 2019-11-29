@@ -41,7 +41,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	public void start(String[] args) {
 		System.out.printf("\nGenerating STM bus data...");
 		long start = System.currentTimeMillis();
-		this.serviceIds = extractUsefulServiceIds(args, this);
+		this.serviceIds = extractUsefulServiceIds(args, this, true);
 		super.start(args);
 		System.out.printf("\nGenerating STM bus data... DONE in %s.\n", Utils.getPrettyDuration(System.currentTimeMillis() - start));
 	}
