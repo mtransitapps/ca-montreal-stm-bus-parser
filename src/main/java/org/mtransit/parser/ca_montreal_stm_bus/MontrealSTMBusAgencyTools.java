@@ -1,13 +1,11 @@
 package org.mtransit.parser.ca_montreal_stm_bus;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.regex.Pattern;
-
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mtransit.parser.CleanUtils;
 import org.mtransit.parser.DefaultAgencyTools;
+import org.mtransit.parser.MTLog;
 import org.mtransit.parser.Utils;
 import org.mtransit.parser.gtfs.data.GCalendar;
 import org.mtransit.parser.gtfs.data.GCalendarDate;
@@ -18,8 +16,13 @@ import org.mtransit.parser.gtfs.data.GTrip;
 import org.mtransit.parser.mt.data.MAgency;
 import org.mtransit.parser.mt.data.MDirectionType;
 import org.mtransit.parser.mt.data.MRoute;
-import org.mtransit.parser.CleanUtils;
 import org.mtransit.parser.mt.data.MTrip;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 // http://www.stm.info/en/about/developers
 // http://www.stm.info/sites/default/files/gtfs/gtfs_stm.zip
@@ -35,15 +38,15 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		new MontrealSTMBusAgencyTools().start(args);
 	}
 
-	private HashSet<String> serviceIds;
+	private HashSet<Integer> serviceIds;
 
 	@Override
-	public void start(String[] args) {
-		System.out.printf("\nGenerating STM bus data...");
+	public void start(@NotNull String[] args) {
+		MTLog.log("Generating STM bus data...");
 		long start = System.currentTimeMillis();
 		this.serviceIds = extractUsefulServiceIds(args, this, true);
 		super.start(args);
-		System.out.printf("\nGenerating STM bus data... DONE in %s.\n", Utils.getPrettyDuration(System.currentTimeMillis() - start));
+		MTLog.log("Generating STM bus data... DONE in %s.", Utils.getPrettyDuration(System.currentTimeMillis() - start));
 	}
 
 	@Override
@@ -51,13 +54,14 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		return this.serviceIds != null && this.serviceIds.isEmpty();
 	}
 
+	@NotNull
 	@Override
 	public Integer getAgencyRouteType() {
 		return MAgency.ROUTE_TYPE_BUS;
 	}
 
 	@Override
-	public boolean excludeTrip(GTrip gTrip) {
+	public boolean excludeTrip(@NotNull GTrip gTrip) {
 		if (this.serviceIds != null) {
 			return excludeUselessTrip(gTrip, this.serviceIds);
 		}
@@ -65,7 +69,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public boolean excludeCalendarDate(GCalendarDate gCalendarDates) {
+	public boolean excludeCalendarDate(@NotNull GCalendarDate gCalendarDates) {
 		if (this.serviceIds != null) {
 			return excludeUselessCalendarDate(gCalendarDates, this.serviceIds);
 		}
@@ -73,7 +77,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public boolean excludeCalendar(GCalendar gCalendar) {
+	public boolean excludeCalendar(@NotNull GCalendar gCalendar) {
 		if (this.serviceIds != null) {
 			return excludeUselessCalendar(gCalendar, this.serviceIds);
 		}
@@ -81,13 +85,13 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public long getRouteId(GRoute gRoute) {
-		return Integer.valueOf(gRoute.getRouteShortName()); // use route short name instead of route ID
+	public long getRouteId(@NotNull GRoute gRoute) {
+		return Long.parseLong(gRoute.getRouteShortName()); // use route short name instead of route ID
 	}
 
 	@Override
-	public int getStopId(GStop gStop) {
-		return Integer.valueOf(getStopCode(gStop)); // use stop code instead of stop ID
+	public int getStopId(@NotNull GStop gStop) {
+		return Integer.parseInt(getStopCode(gStop)); // use stop code instead of stop ID
 	}
 
 	private static final Pattern P1NUITP2 = Pattern.compile("(\\(nuit\\))", Pattern.CASE_INSENSITIVE);
@@ -95,13 +99,15 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	private static final String RTS_809 = "809";
 	private static final String RLN_809 = "Navette";
 
+	@NotNull
 	@Override
-	public String getRouteLongName(GRoute gRoute) {
+	public String getRouteLongName(@NotNull GRoute gRoute) {
 		String gRouteLongName = gRoute.getRouteLongName();
 		if (StringUtils.isEmpty(gRouteLongName)) {
 			if (RTS_809.equals(gRoute.getRouteShortName())) {
 				return RLN_809;
 			}
+			throw new MTLog.Fatal("Unexpected route long name for %s!", gRoute);
 		}
 		return cleanRouteLongName(gRouteLongName);
 	}
@@ -112,7 +118,8 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	private static final Pattern NAVETTE = Pattern.compile("(navette )", Pattern.CASE_INSENSITIVE);
 	private static final String NAVETTE_REPLACEMENT = " ";
 
-	private String cleanRouteLongName(String result) {
+	@NotNull
+	private String cleanRouteLongName(@NotNull String result) {
 		result = P1NUITP2.matcher(result).replaceAll(StringUtils.EMPTY);
 		result = EXPRESS.matcher(result).replaceAll(EXPRESS_REPLACEMENT);
 		result = NAVETTE.matcher(result).replaceAll(NAVETTE_REPLACEMENT);
@@ -123,23 +130,27 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	private static final String AGENCY_COLOR = "009EE0";
 
+	@NotNull
 	@Override
 	public String getAgencyColor() {
 		return AGENCY_COLOR;
 	}
 
-	public static final String COLOR_GREEEN = "007339";
-	public static final String COLOR_BLACK = "000000";
-	public static final String COLOR_BLUE = "0060AA";
+	private static final String COLOR_GREEEN = "007339";
+	private static final String COLOR_BLACK = "000000";
+	private static final String COLOR_BLUE = "0060AA";
+	@SuppressWarnings("unused")
 	public static final String COLOR_OR = "FFD700";
 
-	public static final List<Long> ROUTES_OR = Arrays.asList(new Long[] { //
+	@SuppressWarnings("unused")
+	public static final List<Long> ROUTES_OR = Arrays.asList(//
 			252L, 253L, 254L, 256L, 257L, 258L, 259L, //
-					260L, 262L, 263L //
-			});
+			260L, 262L, 263L //
+	);
 
+	@Nullable
 	@Override
-	public String getRouteColor(GRoute gRoute) {
+	public String getRouteColor(@NotNull GRoute gRoute) {
 		long routeId = getRouteId(gRoute);
 		if (400L <= routeId && routeId <= 499L) {
 			return COLOR_GREEEN;
@@ -151,7 +162,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
+	public void setTripHeadsign(@NotNull MRoute mRoute, @NotNull MTrip mTrip, @NotNull GTrip gTrip, @NotNull GSpec gtfs) {
 		if (gTrip.getTripHeadsign().endsWith("-N")) {
 			mTrip.setHeadsignDirection(MDirectionType.NORTH);
 			return;
@@ -165,26 +176,26 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 			mTrip.setHeadsignDirection(MDirectionType.WEST);
 			return;
 		}
-		System.out.printf("\nUnexpected trip %s.\n", gTrip);
-		System.exit(-1);
+		throw new MTLog.Fatal("Unexpected trip %s.", gTrip);
 	}
 
 	@Override
-	public boolean mergeHeadsign(MTrip mTrip, MTrip mTripToMerge) {
-		System.out.printf("\nUnexpected trips to merge %s & %s!\n", mTrip, mTripToMerge);
-		System.exit(-1);
+	public boolean mergeHeadsign(@NotNull MTrip mTrip, @NotNull MTrip mTripToMerge) {
+		MTLog.logFatal("Unexpected trips to merge %s & %s!", mTrip, mTripToMerge);
 		return false;
 	}
 
+	@NotNull
 	@Override
-	public String cleanTripHeadsign(String tripHeadsign) {
+	public String cleanTripHeadsign(@NotNull String tripHeadsign) {
 		tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
 		tripHeadsign = CleanUtils.cleanStreetTypesFRCA(tripHeadsign);
 		return super.cleanTripHeadsign(tripHeadsign);
 	}
 
+	@NotNull
 	@Override
-	public String cleanStopName(String stopName) {
+	public String cleanStopName(@NotNull String stopName) {
 		stopName = CLEAN_SUBWAY.matcher(stopName).replaceAll(CLEAN_SUBWAY_REPLACEMENT);
 		stopName = CLEAN_SUBWAY2.matcher(stopName).replaceAll(CLEAN_SUBWAY2_REPLACEMENT);
 		stopName = CleanUtils.cleanSlashes(stopName);
@@ -225,16 +236,16 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	private static final String CHARS_DASH = "-";
 
-	private static final Pattern[] START_WITH_ST = new Pattern[] { //
-	Pattern.compile("(^" + CHARS_NO + ")", Pattern.CASE_INSENSITIVE), //
+	private static final Pattern[] START_WITH_ST = new Pattern[]{ //
+			Pattern.compile("(^" + CHARS_NO + ")", Pattern.CASE_INSENSITIVE), //
 			Pattern.compile("(^" + CHARS_VERS + ")", Pattern.CASE_INSENSITIVE), //
 			Pattern.compile("(^" + CHARS_STAR + ")", Pattern.CASE_INSENSITIVE), //
 			Pattern.compile("(^" + CHARS_SLASH + ")", Pattern.CASE_INSENSITIVE), //
 			Pattern.compile("(^" + CHARS_DASH + ")", Pattern.CASE_INSENSITIVE) //
 	};
 
-	private static final Pattern[] SPACE_ST = new Pattern[] { //
-	Pattern.compile("( " + CHARS_NO + ")", Pattern.CASE_INSENSITIVE), //
+	private static final Pattern[] SPACE_ST = new Pattern[]{ //
+			Pattern.compile("( " + CHARS_NO + ")", Pattern.CASE_INSENSITIVE), //
 			Pattern.compile("( " + CHARS_VERS + ")", Pattern.CASE_INSENSITIVE) //
 	};
 }
