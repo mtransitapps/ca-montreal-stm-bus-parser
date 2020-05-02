@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 // http://www.stm.info/sites/default/files/gtfs/gtfs_stm.zip
 public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
-	public static void main(String[] args) {
+	public static void main(@Nullable String[] args) {
 		if (args == null || args.length == 0) {
 			args = new String[3];
 			args[0] = "input/gtfs.zip";
@@ -44,7 +44,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	public void start(@NotNull String[] args) {
 		MTLog.log("Generating STM bus data...");
 		long start = System.currentTimeMillis();
-		this.serviceIds = extractUsefulServiceIds(args, this, true);
+		this.serviceIds = extractUsefulServiceIdInts(args, this, true);
 		super.start(args);
 		MTLog.log("Generating STM bus data... DONE in %s.", Utils.getPrettyDuration(System.currentTimeMillis() - start));
 	}
@@ -63,7 +63,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public boolean excludeTrip(@NotNull GTrip gTrip) {
 		if (this.serviceIds != null) {
-			return excludeUselessTrip(gTrip, this.serviceIds);
+			return excludeUselessTripInt(gTrip, this.serviceIds);
 		}
 		return super.excludeTrip(gTrip);
 	}
@@ -71,7 +71,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public boolean excludeCalendarDate(@NotNull GCalendarDate gCalendarDates) {
 		if (this.serviceIds != null) {
-			return excludeUselessCalendarDate(gCalendarDates, this.serviceIds);
+			return excludeUselessCalendarDateInt(gCalendarDates, this.serviceIds);
 		}
 		return super.excludeCalendarDate(gCalendarDates);
 	}
@@ -79,7 +79,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public boolean excludeCalendar(@NotNull GCalendar gCalendar) {
 		if (this.serviceIds != null) {
-			return excludeUselessCalendar(gCalendar, this.serviceIds);
+			return excludeUselessCalendarInt(gCalendar, this.serviceIds);
 		}
 		return super.excludeCalendar(gCalendar);
 	}
