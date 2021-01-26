@@ -1,11 +1,11 @@
 package org.mtransit.parser.ca_montreal_stm_bus;
 
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mtransit.parser.CleanUtils;
 import org.mtransit.parser.DefaultAgencyTools;
 import org.mtransit.parser.MTLog;
+import org.mtransit.parser.StringUtils;
 import org.mtransit.parser.Utils;
 import org.mtransit.parser.gtfs.data.GCalendar;
 import org.mtransit.parser.gtfs.data.GCalendarDate;
@@ -14,15 +14,14 @@ import org.mtransit.parser.gtfs.data.GSpec;
 import org.mtransit.parser.gtfs.data.GStop;
 import org.mtransit.parser.gtfs.data.GTrip;
 import org.mtransit.parser.mt.data.MAgency;
-import org.mtransit.parser.mt.data.MDirectionType;
 import org.mtransit.parser.mt.data.MRoute;
 import org.mtransit.parser.mt.data.MTrip;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
+
+import static org.mtransit.parser.StringUtils.EMPTY;
 
 // http://www.stm.info/en/about/developers
 // http://www.stm.info/sites/default/files/gtfs/gtfs_stm.zip
@@ -38,6 +37,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		new MontrealSTMBusAgencyTools().start(args);
 	}
 
+	@Nullable
 	private HashSet<Integer> serviceIds;
 
 	@Override
@@ -102,7 +102,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	@NotNull
 	@Override
 	public String getRouteLongName(@NotNull GRoute gRoute) {
-		String gRouteLongName = gRoute.getRouteLongName();
+		String gRouteLongName = gRoute.getRouteLongNameOrDefault();
 		if (StringUtils.isEmpty(gRouteLongName)) {
 			if (RTS_809.equals(gRoute.getRouteShortName())) {
 				return RLN_809;
@@ -120,10 +120,10 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	@NotNull
 	private String cleanRouteLongName(@NotNull String result) {
-		result = P1NUITP2.matcher(result).replaceAll(StringUtils.EMPTY);
+		result = P1NUITP2.matcher(result).replaceAll(EMPTY);
 		result = EXPRESS.matcher(result).replaceAll(EXPRESS_REPLACEMENT);
 		result = NAVETTE.matcher(result).replaceAll(NAVETTE_REPLACEMENT);
-		result = Utils.replaceAll(result.trim(), START_WITH_ST, StringUtils.EMPTY);
+		result = Utils.replaceAll(result.trim(), START_WITH_ST, EMPTY);
 		result = Utils.replaceAll(result, SPACE_ST, CleanUtils.SPACE);
 		return CleanUtils.cleanLabelFR(result);
 	}
@@ -136,59 +136,75 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		return AGENCY_COLOR;
 	}
 
-	private static final String COLOR_GREEEN = "007339";
+	private static final String COLOR_GREEN = "007339";
 	private static final String COLOR_BLACK = "000000";
 	private static final String COLOR_BLUE = "0060AA";
-	@SuppressWarnings("unused")
-	public static final String COLOR_OR = "FFD700";
+	// private static final String COLOR_OR = "FFD700";
 
-	@SuppressWarnings("unused")
-	public static final List<Long> ROUTES_OR = Arrays.asList(//
-			252L, 253L, 254L, 256L, 257L, 258L, 259L, //
-			260L, 262L, 263L //
-	);
+	//	private static final List<Long> ROUTES_OR = Arrays.asList(//
+	//			252L, 253L, 254L, 256L, 257L, 258L, 259L, //
+	//			260L, 262L, 263L //
+	//	);
 
 	@Nullable
 	@Override
 	public String getRouteColor(@NotNull GRoute gRoute) {
-		long routeId = getRouteId(gRoute);
-		if (400L <= routeId && routeId <= 499L) {
-			return COLOR_GREEEN;
+		String routeColor = gRoute.getRouteColor();
+		if (AGENCY_COLOR.equalsIgnoreCase(routeColor)) {
+			routeColor = null; // ignore agency color (light blue)
 		}
-		if (300L <= routeId && routeId <= 399L) {
-			return COLOR_BLACK;
+		if (StringUtils.isEmpty(routeColor)) {
+			long routeId = getRouteId(gRoute);
+			if (400L <= routeId && routeId <= 499L) {
+				return COLOR_GREEN;
+			}
+			if (300L <= routeId && routeId <= 399L) {
+				return COLOR_BLACK;
+			}
+			return COLOR_BLUE;
 		}
-		return COLOR_BLUE;
+		return super.getRouteColor(gRoute);
 	}
 
 	@Override
 	public void setTripHeadsign(@NotNull MRoute mRoute, @NotNull MTrip mTrip, @NotNull GTrip gTrip, @NotNull GSpec gtfs) {
-		if (gTrip.getTripHeadsign().endsWith("-N")) {
-			mTrip.setHeadsignDirection(MDirectionType.NORTH);
-			return;
-		} else if (gTrip.getTripHeadsign().endsWith("-S")) {
-			mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-			return;
-		} else if (gTrip.getTripHeadsign().endsWith("-E")) {
-			mTrip.setHeadsignDirection(MDirectionType.EAST);
-			return;
-		} else if (gTrip.getTripHeadsign().endsWith("-O")) {
-			mTrip.setHeadsignDirection(MDirectionType.WEST);
-			return;
-		}
-		throw new MTLog.Fatal("Unexpected trip %s.", gTrip);
+		mTrip.setHeadsignString(
+				cleanTripHeadsign(gTrip.getTripHeadsignOrDefault()),
+				gTrip.getDirectionIdOrDefault()
+		);
+	}
+
+	@Override
+	public boolean directionFinderEnabled() {
+		return true;
+	}
+
+	private static final Pattern STARTS_WITH_RSN_DASH_ = Pattern.compile("(^\\d+-)", Pattern.CASE_INSENSITIVE);
+
+	@NotNull
+	@Override
+	public String cleanDirectionHeadsign(boolean fromStopName, @NotNull String directionHeadSign) {
+		directionHeadSign = STARTS_WITH_RSN_DASH_.matcher(directionHeadSign).replaceAll(EMPTY); // keep E/W/N/S
+		return directionHeadSign;
+	}
+
+	@Override
+	public int getDirectionType() {
+		return MTrip.HEADSIGN_TYPE_DIRECTION;
 	}
 
 	@Override
 	public boolean mergeHeadsign(@NotNull MTrip mTrip, @NotNull MTrip mTripToMerge) {
-		MTLog.logFatal("Unexpected trips to merge %s & %s!", mTrip, mTripToMerge);
-		return false;
+		throw new MTLog.Fatal("Unexpected trips to merge %s & %s!", mTrip, mTripToMerge);
 	}
+
+	private static final Pattern STARTS_WITH_RSN_DASH_BOUND_ = Pattern.compile("(^\\d+-[A-Z])");
 
 	@NotNull
 	@Override
 	public String cleanTripHeadsign(@NotNull String tripHeadsign) {
-		tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
+		tripHeadsign = STARTS_WITH_RSN_DASH_BOUND_.matcher(tripHeadsign).replaceAll(EMPTY); // E/W/N/W used for direction, not trip head-sign
+		tripHeadsign = CleanUtils.toLowerCaseUpperCaseWords(Locale.FRENCH, tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypesFRCA(tripHeadsign);
 		return super.cleanTripHeadsign(tripHeadsign);
 	}
