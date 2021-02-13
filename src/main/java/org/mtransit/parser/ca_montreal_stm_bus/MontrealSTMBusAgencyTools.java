@@ -119,7 +119,8 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	private static final String NAVETTE_REPLACEMENT = " ";
 
 	@NotNull
-	private String cleanRouteLongName(@NotNull String result) {
+	@Override
+	public String cleanRouteLongName(@NotNull String result) {
 		result = P1NUITP2.matcher(result).replaceAll(EMPTY);
 		result = EXPRESS.matcher(result).replaceAll(EXPRESS_REPLACEMENT);
 		result = NAVETTE.matcher(result).replaceAll(NAVETTE_REPLACEMENT);
