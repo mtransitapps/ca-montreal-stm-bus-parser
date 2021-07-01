@@ -19,8 +19,8 @@ import java.util.regex.Pattern;
 
 import static org.mtransit.parser.StringUtils.EMPTY;
 
-// http://www.stm.info/en/about/developers
-// http://www.stm.info/sites/default/files/gtfs/gtfs_stm.zip
+// https://www.stm.info/en/about/developers
+// https://www.stm.info/sites/default/files/gtfs/gtfs_stm.zip
 public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	public static void main(@NotNull String[] args) {
