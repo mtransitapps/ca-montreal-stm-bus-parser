@@ -10,7 +10,6 @@ import org.mtransit.commons.CleanUtils;
 import org.mtransit.commons.RegexUtils;
 import org.mtransit.commons.StringUtils;
 import org.mtransit.parser.DefaultAgencyTools;
-import org.mtransit.parser.MTLog;
 import org.mtransit.parser.gtfs.data.GRoute;
 import org.mtransit.parser.gtfs.data.GStop;
 import org.mtransit.parser.mt.data.MAgency;
@@ -27,6 +26,12 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	public static void main(@NotNull String[] args) {
 		new MontrealSTMBusAgencyTools().start(args);
+	}
+
+	@Nullable
+	@Override
+	public List<Locale> getSupportedLanguages() {
+		return LANG_FR_EN;
 	}
 
 	@Override
@@ -47,8 +52,13 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public long getRouteId(@NotNull GRoute gRoute) {
-		return Long.parseLong(gRoute.getRouteShortName()); // use route short name instead of route ID
+	public boolean defaultRouteIdEnabled() {
+		return true;
+	}
+
+	@Override
+	public boolean useRouteShortNameForRouteId() {
+		return true;
 	}
 
 	@Override
@@ -58,20 +68,9 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	private static final Pattern P1NUITP2 = Pattern.compile("(\\(nuit\\))", Pattern.CASE_INSENSITIVE);
 
-	private static final String RTS_809 = "809";
-	private static final String RLN_809 = "Navette";
-
-	@NotNull
 	@Override
-	public String getRouteLongName(@NotNull GRoute gRoute) {
-		final String gRouteLongName = gRoute.getRouteLongNameOrDefault();
-		if (StringUtils.isEmpty(gRouteLongName)) {
-			if (RTS_809.equals(gRoute.getRouteShortName())) {
-				return RLN_809;
-			}
-			throw new MTLog.Fatal("Unexpected route long name for %s!", gRoute);
-		}
-		return cleanRouteLongName(gRouteLongName);
+	public boolean defaultRouteLongNameEnabled() {
+		return true;
 	}
 
 	private static final Pattern EXPRESS_ = CleanUtils.cleanWord("express");
@@ -99,24 +98,17 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	@Nullable
 	@Override
-	public String getRouteColor(@NotNull GRoute gRoute, @NotNull MAgency agency) {
-		String routeColor = gRoute.getRouteColor();
-		if (agency.getColor().equalsIgnoreCase(routeColor)) {
-			routeColor = null; // ignore agency color (light blue)
+	public String provideMissingRouteColor(@NotNull GRoute gRoute) {
+		final String rln = gRoute.getRouteLongNameOrDefault();
+		final long routeID = getRouteId(gRoute);
+		if (rln.contains("express")
+				|| 400L <= routeID && routeID <= 499L) {
+			return COLOR_GREEN_EXPRESS;
+		} else if (300L <= routeID && routeID <= 399L) {
+			return COLOR_BLACK_NIGHT;
+		} else {
+			return COLOR_BLUE_REGULAR;
 		}
-		if (StringUtils.isEmpty(routeColor)) {
-			final String rln = gRoute.getRouteLongNameOrDefault();
-			final long routeID = getRouteId(gRoute);
-			if (rln.contains("express")
-					|| 400L <= routeID && routeID <= 499L) {
-				return COLOR_GREEN_EXPRESS;
-			} else if (300L <= routeID && routeID <= 399L) {
-				return COLOR_BLACK_NIGHT;
-			} else {
-				return COLOR_BLUE_REGULAR;
-			}
-		}
-		return super.getRouteColor(gRoute, agency);
 	}
 
 	@Override
