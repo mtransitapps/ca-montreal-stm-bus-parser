@@ -3,11 +3,22 @@ package org.mtransit.parser.ca_montreal_stm_bus;
 import static org.mtransit.commons.Constants.EMPTY;
 import static org.mtransit.commons.Constants.SPACE;
 import static org.mtransit.commons.Constants.SPACE_;
+import static org.mtransit.commons.HtmlSymbols.HOSPITAL_;
+import static org.mtransit.commons.HtmlSymbols.SUBWAY_;
+import static org.mtransit.commons.RegexUtils.ANY;
+import static org.mtransit.commons.RegexUtils.BEGINNING;
+import static org.mtransit.commons.RegexUtils.END;
+import static org.mtransit.commons.RegexUtils.WHITESPACE_CAR;
+import static org.mtransit.commons.RegexUtils.except;
+import static org.mtransit.commons.RegexUtils.group;
+import static org.mtransit.commons.RegexUtils.mGroup;
+import static org.mtransit.commons.RegexUtils.many;
+import static org.mtransit.commons.RegexUtils.maybe;
+import static org.mtransit.commons.RegexUtils.or;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mtransit.commons.CleanUtils;
-import org.mtransit.commons.HtmlSymbols;
 import org.mtransit.commons.RegexUtils;
 import org.mtransit.commons.StringUtils;
 import org.mtransit.parser.DefaultAgencyTools;
@@ -149,9 +160,9 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public String cleanStopName(@NotNull String stopName) {
 		stopName = CLEAN_SUBWAY.matcher(stopName).replaceAll(CLEAN_SUBWAY_REPLACEMENT);
-		stopName = CLEAN_SUBWAY_P2_MISSING.matcher(stopName).replaceAll(CLEAN_SUBWAY_P2_MISSING_REPLACEMENT);
 		stopName = CLEAN_SUBWAY2.matcher(stopName).replaceAll(CLEAN_SUBWAY2_REPLACEMENT);
 		stopName = CLEAN_SUBWAY_ONLY.matcher(stopName).replaceAll(CLEAN_SUBWAY_ONLY_REPLACEMENT);
+		stopName = CLEAN_HOSPITAL.matcher(stopName).replaceAll(CLEAN_HOSPITAL_REPLACEMENT);
 		stopName = EDICULE_NSEW_.matcher(stopName).replaceAll(EDICULE_NSEW_REPLACEMENT);
 		stopName = CleanUtils.cleanSlashes(stopName);
 		stopName = RegexUtils.replaceAllNN(stopName.trim(), START_WITH_ST, StringUtils.EMPTY);
@@ -174,25 +185,29 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	private static final String P2 = "\\)";
 	private static final String SLASH = "/";
 
-	private static final Pattern CLEAN_SUBWAY = Pattern.compile("(station)" +
-					"([^" + P1 + "]*)" + P1 +
-					"([^" + SLASH + "]*)" + SLASH +
-					"([^" + P2 + "]*)" + P2
+	private static final Pattern CLEAN_SUBWAY = Pattern.compile(BEGINNING + group("station") +
+					group(many(except(P1))) + maybe(WHITESPACE_CAR) + P1 +
+					group(many(except(SLASH))) + maybe(WHITESPACE_CAR) + SLASH + maybe(WHITESPACE_CAR) +
+					group(or(many(except(P2)), many(ANY))) + maybe(P2) + // P2 can be missing in original data
+					END
 			, Pattern.CASE_INSENSITIVE);
-	private static final String CLEAN_SUBWAY_REPLACEMENT = "$3 " + SLASH + " $4 " + P1 + HtmlSymbols.SUBWAY_ + "$2" + P2 + "";
-
-	private static final Pattern CLEAN_SUBWAY_P2_MISSING = Pattern.compile("(station)" +
-					"([^" + P1 + "]*)" + P1 +
-					"([^" + SLASH + "]*)" + SLASH +
-					"(.*)"
-			, Pattern.CASE_INSENSITIVE);
-	private static final String CLEAN_SUBWAY_P2_MISSING_REPLACEMENT = "$3 " + SLASH + " $4 " + P1 + HtmlSymbols.SUBWAY_ + "$2" + P2 + "";
+	private static final String CLEAN_SUBWAY_REPLACEMENT = mGroup(3) + SPACE_ + SLASH + SPACE_ + mGroup(4) + SPACE_ + P1 + SUBWAY_ + mGroup(2) + P2;
 
 	private static final Pattern CLEAN_SUBWAY2 = Pattern.compile("(station)([^" + SLASH + "]*)" + SLASH + "(.*)", Pattern.CASE_INSENSITIVE);
-	private static final String CLEAN_SUBWAY2_REPLACEMENT = "$3 " + P1 + HtmlSymbols.SUBWAY_ + "$2" + P2 + "";
+	private static final String CLEAN_SUBWAY2_REPLACEMENT = "$3 " + P1 + SUBWAY_ + "$2" + P2 + "";
 
 	private static final Pattern CLEAN_SUBWAY_ONLY = Pattern.compile("(^(station) (.*))", Pattern.CASE_INSENSITIVE);
-	private static final String CLEAN_SUBWAY_ONLY_REPLACEMENT = "$2" + SPACE + HtmlSymbols.SUBWAY_ + "$3";
+	private static final String CLEAN_SUBWAY_ONLY_REPLACEMENT = "$2" + SPACE + SUBWAY_ + "$3";
+
+	private static final Pattern CLEAN_HOSPITAL = Pattern.compile(BEGINNING + group("h[oô]pital") +
+					group(many(except(P1))) + maybe(WHITESPACE_CAR) + P1 +
+					group(many(except(SLASH))) + maybe(WHITESPACE_CAR) + SLASH + maybe(WHITESPACE_CAR) +
+					group(or(many(except(P2)), many(ANY))) + maybe(P2) + // P2 can be missing in original data
+					END
+			, Pattern.CASE_INSENSITIVE);
+	private static final String CLEAN_HOSPITAL_REPLACEMENT = mGroup(3) + SPACE_ + SLASH + SPACE_ + mGroup(4) + SPACE_ + P1 +
+			(HOSPITAL_.isEmpty() ? "Hôp" : HOSPITAL_)
+			+ mGroup(2) + P2;
 
 	private static final Pattern EDICULE_NSEW_ = Pattern.compile(P1 + "[eé]dicule " + "([^" + P2 + "]*)" + P2, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CHARACTER_CLASS);
 	private static final String EDICULE_NSEW_REPLACEMENT = P1 + "$1" + P2;
