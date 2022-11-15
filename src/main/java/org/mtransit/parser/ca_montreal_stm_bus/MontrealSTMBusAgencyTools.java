@@ -7,6 +7,7 @@ import static org.mtransit.commons.Constants.SPACE_;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mtransit.commons.CleanUtils;
+import org.mtransit.commons.HtmlSymbols;
 import org.mtransit.commons.RegexUtils;
 import org.mtransit.commons.StringUtils;
 import org.mtransit.parser.DefaultAgencyTools;
@@ -148,7 +149,10 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public String cleanStopName(@NotNull String stopName) {
 		stopName = CLEAN_SUBWAY.matcher(stopName).replaceAll(CLEAN_SUBWAY_REPLACEMENT);
+		stopName = CLEAN_SUBWAY_P2_MISSING.matcher(stopName).replaceAll(CLEAN_SUBWAY_P2_MISSING_REPLACEMENT);
 		stopName = CLEAN_SUBWAY2.matcher(stopName).replaceAll(CLEAN_SUBWAY2_REPLACEMENT);
+		stopName = CLEAN_SUBWAY_ONLY.matcher(stopName).replaceAll(CLEAN_SUBWAY_ONLY_REPLACEMENT);
+		stopName = EDICULE_NSEW_.matcher(stopName).replaceAll(EDICULE_NSEW_REPLACEMENT);
 		stopName = CleanUtils.cleanSlashes(stopName);
 		stopName = RegexUtils.replaceAllNN(stopName.trim(), START_WITH_ST, StringUtils.EMPTY);
 		stopName = RegexUtils.replaceAllNN(stopName, SPACE_ST, CleanUtils.SPACE);
@@ -166,14 +170,32 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		return resultSB.toString();
 	}
 
-	private static final String PARENTHESIS1 = "\\(";
-	private static final String PARENTHESIS2 = "\\)";
+	private static final String P1 = "\\(";
+	private static final String P2 = "\\)";
 	private static final String SLASH = "/";
-	private static final Pattern CLEAN_SUBWAY = Pattern.compile("(station)([^" + PARENTHESIS1 + "]*)" + PARENTHESIS1 + "([^" + SLASH + "]*)" + SLASH + "([^"
-			+ PARENTHESIS2 + "]*)" + PARENTHESIS2, Pattern.CASE_INSENSITIVE);
-	private static final String CLEAN_SUBWAY_REPLACEMENT = "$3 " + SLASH + " $4 " + PARENTHESIS1 + "$2" + PARENTHESIS2 + "";
+
+	private static final Pattern CLEAN_SUBWAY = Pattern.compile("(station)" +
+					"([^" + P1 + "]*)" + P1 +
+					"([^" + SLASH + "]*)" + SLASH +
+					"([^" + P2 + "]*)" + P2
+			, Pattern.CASE_INSENSITIVE);
+	private static final String CLEAN_SUBWAY_REPLACEMENT = "$3 " + SLASH + " $4 " + P1 + HtmlSymbols.SUBWAY_ + "$2" + P2 + "";
+
+	private static final Pattern CLEAN_SUBWAY_P2_MISSING = Pattern.compile("(station)" +
+					"([^" + P1 + "]*)" + P1 +
+					"([^" + SLASH + "]*)" + SLASH +
+					"(.*)"
+			, Pattern.CASE_INSENSITIVE);
+	private static final String CLEAN_SUBWAY_P2_MISSING_REPLACEMENT = "$3 " + SLASH + " $4 " + P1 + HtmlSymbols.SUBWAY_ + "$2" + P2 + "";
+
 	private static final Pattern CLEAN_SUBWAY2 = Pattern.compile("(station)([^" + SLASH + "]*)" + SLASH + "(.*)", Pattern.CASE_INSENSITIVE);
-	private static final String CLEAN_SUBWAY2_REPLACEMENT = "$3 " + PARENTHESIS1 + "$2" + PARENTHESIS2 + "";
+	private static final String CLEAN_SUBWAY2_REPLACEMENT = "$3 " + P1 + HtmlSymbols.SUBWAY_ + "$2" + P2 + "";
+
+	private static final Pattern CLEAN_SUBWAY_ONLY = Pattern.compile("(^(station) (.*))", Pattern.CASE_INSENSITIVE);
+	private static final String CLEAN_SUBWAY_ONLY_REPLACEMENT = "$2" + SPACE + HtmlSymbols.SUBWAY_ + "$3";
+
+	private static final Pattern EDICULE_NSEW_ = Pattern.compile(P1 + "[eé]dicule " + "([^" + P2 + "]*)" + P2, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CHARACTER_CLASS);
+	private static final String EDICULE_NSEW_REPLACEMENT = P1 + "$1" + P2;
 
 	private static final String CHARS_NO = "no ";
 
