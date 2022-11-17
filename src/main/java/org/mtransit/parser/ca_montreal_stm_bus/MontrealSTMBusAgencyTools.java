@@ -164,7 +164,7 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 					group("no" + any(WHITESPACE_CAR)) +
 					group(oneOrMore(DIGIT_CAR))
 			, Pattern.CASE_INSENSITIVE);
-	private static final String NUMBER_REPLACEMENT = mGroup(1) + mGroup(3);
+	private static final String NUMBER_REPLACEMENT = mGroup(1) + "#" + mGroup(3);
 
 	@NotNull
 	@Override
