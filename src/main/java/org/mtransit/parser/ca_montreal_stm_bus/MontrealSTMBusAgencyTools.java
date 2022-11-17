@@ -2,7 +2,9 @@ package org.mtransit.parser.ca_montreal_stm_bus;
 
 import static org.mtransit.commons.Constants.EMPTY;
 import static org.mtransit.commons.Constants.SPACE_;
+import static org.mtransit.commons.HtmlSymbols.AIRPORT_;
 import static org.mtransit.commons.HtmlSymbols.SUBWAY_;
+import static org.mtransit.commons.HtmlSymbols.TRAIN_;
 import static org.mtransit.commons.RegexUtils.ANY;
 import static org.mtransit.commons.RegexUtils.BEGINNING;
 import static org.mtransit.commons.RegexUtils.DIGIT_CAR;
@@ -159,6 +161,11 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		return super.cleanTripHeadsign(tripHeadsign);
 	}
 
+	private static final Pattern ETS_ = Pattern.compile(
+			group(maybe(group("[eé]cole")) + " De Technologie Supérieure")
+			, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CHARACTER_CLASS);
+	private static final String ETS_REPLACEMENT = "ETS";
+
 	private static final Pattern NUMBER_ = Pattern.compile(
 			group(or(BEGINNING, oneOrMore(WHITESPACE_CAR))) +
 					group("no" + any(WHITESPACE_CAR)) +
@@ -175,6 +182,13 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 		stopName = CLEAN_SUBWAY.matcher(stopName).replaceAll(CLEAN_SUBWAY_REPLACEMENT);
 		stopName = CLEAN_SUBWAY2.matcher(stopName).replaceAll(CLEAN_SUBWAY2_REPLACEMENT);
 		stopName = CLEAN_SUBWAY_ONLY.matcher(stopName).replaceAll(CLEAN_SUBWAY_ONLY_REPLACEMENT);
+
+		stopName = CLEAN_TRAIN.matcher(stopName).replaceAll(CLEAN_TRAIN_REPLACEMENT);
+		stopName = CLEAN_TRAIN_ONLY.matcher(stopName).replaceAll(CLEAN_TRAIN_ONLY_REPLACEMENT);
+
+		stopName = CLEAN_AIRPORT.matcher(stopName).replaceAll(CLEAN_AIRPORT_REPLACEMENT);
+		stopName = CLEAN_AIRPORT_ONLY.matcher(stopName).replaceAll(CLEAN_AIRPORT_ONLY_REPLACEMENT);
+		stopName = ETS_.matcher(stopName).replaceAll(ETS_REPLACEMENT);
 		stopName = EXIT_BOUND_.matcher(stopName).replaceAll(EXIT_BOUND_REPLACEMENT);
 		stopName = NUMBER_.matcher(stopName).replaceAll(NUMBER_REPLACEMENT);
 		stopName = CleanUtils.cleanSlashes(stopName);
@@ -210,6 +224,20 @@ public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	private static final Pattern CLEAN_SUBWAY_ONLY = makePOIOnlyPattern(CLEAN_SUBWAY_WORDS_);
 	private static final String CLEAN_SUBWAY_ONLY_REPLACEMENT = makePOIOnlyReplaceAll(SUBWAY_);
+
+	private static final String CLEAN_TRAIN_WORDS_ = "gare ";
+	private static final Pattern CLEAN_TRAIN = makeStreetsP1POIP2Pattern(CLEAN_TRAIN_WORDS_);
+	private static final String CLEAN_TRAIN_REPLACEMENT = makeStreetsP1POIP2ReplaceAll(TRAIN_, true);
+
+	private static final Pattern CLEAN_TRAIN_ONLY = makePOIOnlyPattern(CLEAN_TRAIN_WORDS_);
+	private static final String CLEAN_TRAIN_ONLY_REPLACEMENT = makePOIOnlyReplaceAll(TRAIN_);
+
+	private static final String CLEAN_AIRPORT_WORDS_ = "a[ée]roport ";
+	private static final Pattern CLEAN_AIRPORT = makeStreetsP1POIP2Pattern(CLEAN_AIRPORT_WORDS_);
+	private static final String CLEAN_AIRPORT_REPLACEMENT = makeStreetsP1POIP2ReplaceAll(AIRPORT_, true);
+
+	private static final Pattern CLEAN_AIRPORT_ONLY = makePOIOnlyPattern(CLEAN_AIRPORT_WORDS_);
+	private static final String CLEAN_AIRPORT_ONLY_REPLACEMENT = makePOIOnlyReplaceAll(AIRPORT_);
 
 	private static final Pattern P1_WORD_P2_ = Pattern.compile(P1 + group(atLeastOne(WORD_CAR)) + P2 + WHITESPACE_CAR, Pattern.CASE_INSENSITIVE);
 	private static final String P1_WORD_P2_REPLACEMENT = mGroup(1) + SPACE_;
