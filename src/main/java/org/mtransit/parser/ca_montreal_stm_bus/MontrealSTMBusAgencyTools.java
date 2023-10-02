@@ -38,6 +38,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 // https://www.stm.info/en/about/developers
+// https://www.stm.info/fr/a-propos/developpeurs
 public class MontrealSTMBusAgencyTools extends DefaultAgencyTools {
 
 	public static void main(@NotNull String[] args) {
